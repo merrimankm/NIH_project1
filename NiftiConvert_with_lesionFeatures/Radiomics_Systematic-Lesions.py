@@ -210,11 +210,6 @@ class featureCalculator():
                 UpperArr[mskNZ[0][index], mskNZ[1][index], mskNZ[2][index]] = 1
 
 
-
-        #for nz in range(mskNZ[0].tolist().index(lowerZ)):
-        #    LowerArr[mskNZ[0][nz], mskNZ[1][nz], mskNZ[2][nz]] = 1
-
-
         ## Write masks to file to check function
         LowerMask = sitk.GetImageFromArray(LowerArr)
         LowerMask.CopyInformation(mask_img)
