@@ -59,7 +59,6 @@ class featureCalculator():
         self.PIRADS5names = ['PIRADS_5', 'pirads_5', 'PZ_5', 'TZ_5']
         self.PIRADS4names = ['PIRADS_4', 'pirads_4', 'PZ_4', 'TZ_4']
         self.PIRADS3names = ['PIRADS_3', 'pirads_3', 'PZ_3', 'TZ_3']
-        self.wpLesion = '1_PIRADS_1_bt.nii'
 
 
     def calculate(self):
@@ -164,7 +163,7 @@ class featureCalculator():
                             PIRADS = 4
                         elif any([substring in name for substring in self.PIRADS3names]):
                             PIRADS = 3
-                        elif any([substring in name for substring in self.wpLesion]):
+                        elif '1_PIRADS_1_bt' in name:
                             PIRADS = 6
                         else:
                             PIRADS = 2
