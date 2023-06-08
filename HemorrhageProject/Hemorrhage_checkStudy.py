@@ -35,11 +35,9 @@ class DICOMconverter():
             # if on lambda, I just change "pathways" to 0 instead of commenting/uncommenting multiple lines
 
         if pathways:
-            #self.csv_file = r'T:\MIP\Robert Huang\2022_06_01\other\hemorrhage\patients2convert.csv'
             self.patientFolder = r'T:\MIP\Robert Huang\2022_06_01\other\hemorrhage'
 
         else:
-            #self.csv_file = 'Mdrive_mount/MIP/Robert Huang/2022_06_01/other/hemorrhage/patients2convert.csv'
             self.patientFolder = 'Mdrive_mount/MIP/Robert Huang/2022_06_01/other/hemorrhage'
 
 
@@ -56,8 +54,7 @@ class DICOMconverter():
                 patient.append([patientID, patientPath, 0])
 
         for i in range(0, len(patient)):
-            self.sortDICOMS(patient[i]) # stores number of successful conversions
-            #print(self.DICOMdetails)
+            self.sortDICOMS(patient[i])
             self.DICOMdetails.append([])
 
         self.create_csv_files()

@@ -10,7 +10,8 @@
 #
 
 
-import SimpleITK as sitk
+import SimpleITK as sitk # version 2.0.2
+# import SimpleITK as sitk
 import pandas as pd
 from skimage import draw
 import numpy as np
@@ -31,9 +32,12 @@ np.set_printoptions(threshold=np.inf)
 
 class convert_nifti():
     def __init__(self):
-        self.dicom_folder = r'T:\MRIClinical\surgery_cases'
-        self.csv_file = r'T:\MIP\Katie_Merriman\ZoeKatieCollab\VOItest.csv'
-        self.save_folder = r'T:\MIP\Katie_Merriman\ZoeKatieCollab\ConvertedDICOM'
+        #self.dicom_folder = r'T:\MRIClinical\surgery_cases'
+        #self.csv_file = r'T:\MIP\Katie_Merriman\ZoeKatieCollab\VOItest.csv'
+        #self.save_folder = r'T:\MIP\Katie_Merriman\ZoeKatieCollab\ConvertedDICOM'
+        self.dicom_folder = 'Mdrive_mount/MRIClinical/surgery_cases'
+        self.csv_file = 'Mdrive_mount/MIP/Katie_Merriman/ZoeKatieCollab/VOItest.csv'
+        self.save_folder = 'Mdrive_mount/MIP/Katie_Merriman/ZoeKatieCollab/ConvertedDICOM'
         self.patient_data = []
         self.lesion_data = []
         self.error_data = []
@@ -50,7 +54,7 @@ class convert_nifti():
             patient_id = str(file_i['MRN'])
             ## check if nifti folder exists
             #       missing nifti folder indicates missing converted DICOM files from csvDicom_searchConvert.py
-            if not os.path.exists(os.path.join(self.save_folder, patient_id, 'nifti')):
+            if not os.path.exists(os.path.join(self.save_folder, patient_id)):
                 print('No Nifti folder!')
                 self.error_data.append([patient_id, 'No Nifti Folder'])
             else:
@@ -144,12 +148,12 @@ class convert_nifti():
 
 
         #load t2 and adc niftis, create arrays
-        t2_img_path = os.path.join(self.save_folder, patient_id, 'NIfTI', 'T2.nii')
+        t2_img_path = os.path.join(self.save_folder, patient_id, 'T2.nii')
         t2_img = sitk.ReadImage(t2_img_path)
         img_array = sitk.GetArrayFromImage(t2_img)
         img_array = np.swapaxes(img_array, 2, 0)
 
-        adc_img_path = os.path.join(self.save_folder, patient_id, 'NIfTI', 'ADC.nii.gz')
+        adc_img_path = os.path.join(self.save_folder, patient_id, 'ADC.nii.gz')
         adc_img = sitk.ReadImage(adc_img_path)
         adc_array = sitk.GetArrayFromImage(adc_img)
         adc_array = np.swapaxes(adc_array, 2, 0)
@@ -190,7 +194,7 @@ class convert_nifti():
                 img_out.SetMetaData(meta_elem, t2_img.GetMetaData(meta_elem))
             niftiPath = os.path.basename(file)
             niftiPath = str.replace(niftiPath, '.voi', '.nii.gz')
-            niftiPath = os.path.join(self.save_folder, patient_id, 'Nifti', niftiPath)
+            niftiPath = os.path.join(self.save_folder, patient_id, niftiPath)
             sitk.WriteImage(img_out, niftiPath)
 
             #extractor = featureextractor.RadiomicsFeatureExtractor()

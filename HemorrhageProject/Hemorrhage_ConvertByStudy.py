@@ -46,7 +46,8 @@ class DICOMconverter():
             # if on lambda, I just change "pathways" to 0 instead of commenting/uncommenting multiple lines
 
         if pathways:
-            self.patientFolder = r'T:\MIP\Robert Huang\2022_06_01\other\hemorrhage'
+            self.patientFolder = r'T:\MIP\Robert Huang\2022_11_01\other\no hemorrhage'
+            #self.patientFolder = r'T:\MIP\Robert Huang\2022_06_01\other\hemorrhage'
             self.saveMST = r'T:\MIP\Robert Huang\2022_06_01\other\hemorrhage\MST'
             self.saveT1 = r'T:\MIP\Robert Huang\2022_06_01\other\hemorrhage\T1_TSE_ax'
 
@@ -69,7 +70,7 @@ class DICOMconverter():
                 patient.append([patientID, patientPath])
 
         for i in range(0, len(patient)):
-            anonName = str(i+1)
+            anonName = str(i+91)
             if len(anonName)<2:
                 anonName = '00'+anonName
             elif len(anonName)<3:
@@ -193,8 +194,8 @@ class DICOMconverter():
             csvwriter.writerow(niftiHeader)
             csvwriter.writerows(self.Conversions)
 
-        nifti_cvsFileName = os.path.join(self.patientFolder, 'AnonList.csv')
-        niftiHeader = ['MRN', 'AnonName','numNIfTIs']
+        nifti_cvsFileName = os.path.join(self.patientFolder, 'AnonList2.csv')
+        niftiHeader = ['MRN', 'AnonName', 'numNIfTIs']
         with open(nifti_cvsFileName, 'w', newline="") as file2write:
             csvwriter = csv.writer(file2write)
             csvwriter.writerow(niftiHeader)
